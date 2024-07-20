@@ -18,7 +18,7 @@ Rest well knowing your REST API is correctly typed!
 ### Installation
 
 ```sh
-npm i well-rested
+npm i @rachelambda/well-rested
 ```
 
 ### Usage
@@ -29,7 +29,7 @@ In order to define an API you simply define a type which extends the `APIDef` in
 
 `API.ts`
 ```typescript
-import { API } from 'well-rested'
+import { API } from '@rachelambda/well-rested'
 
 type MyAPI = {
   "/foo/bar": {

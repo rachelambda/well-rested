@@ -1,6 +1,6 @@
 {
-  "name": "well-rested",
-  "version": "0.1.0",
+  "name": "@rachelambda/well-rested",
+  "version": "0.1.1",
   "description": "A typescript package for defining well-typed restful APIs",
   "type": "module",
   "exports": "./dist/index.js",
