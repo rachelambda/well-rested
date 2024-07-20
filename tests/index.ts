@@ -1,4 +1,4 @@
-import { API } from '../src/index.ts'
+import { API } from '../src/index.js'
 
 // Expample API with two endpoints
 type MyAPI = {
@@ -24,19 +24,28 @@ type MyAPI = {
   },
 }
 
-const myApi = new API<MyAPI>("https://myservice.test")
+export const myApi = new API<MyAPI>("http://localhost:8000")
+export default myApi
 
-const barResponse : Promise<{ name: string } | Response> = myApi.get("/foo/bar", {
+const barResponse : { name: string } | Response = await myApi.get("/foo/bar", {
   query: { id: 5 }
 })
 
-const dateResponse : Promise<{ date: string } | Response> = myApi.get("/foo/time", {})
+console.log(barResponse)
 
-const loginResponse : Promise<{ accessToken: string } | { error: string } | Response> = myApi.post("/foo/login", {
+const dateResponse : { date: string } | Response = await myApi.get("/foo/time", {})
+
+console.log(dateResponse)
+
+const loginResponse : { accessToken: string } | { error: string } | Response = await myApi.post("/foo/login", {
   request: { user: { name: "bunger", password: "cat" } } 
 })
 
-const postResponse : Promise<{ result: string } | { error: string } | Response> = myApi.post("/foo/post", { 
+console.log(loginResponse)
+
+const postResponse : { result: string } | { error: string } | Response = await myApi.post("/foo/post", { 
   query: { postid: 42 },
   request: { accessToken: "so_secret" } 
 })
+
+console.log(postResponse)

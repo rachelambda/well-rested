@@ -2,7 +2,9 @@
   "name": "well-rested",
   "version": "0.1.0",
   "description": "A typescript package for defining well-typed restful APIs",
-  "main": "index.ts",
+  "type": "module",
+  "exports": "index.ts",
+  "engines": ">= 18.0.0",
   "scripts": {
     "build": "tsc",
     "test": "tsc -p ./tsconfig.test.json"
