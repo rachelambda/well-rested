@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "description": "A typescript package for defining well-typed restful APIs",
   "type": "module",
-  "exports": "index.ts",
+  "exports": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "engines": ">= 18.0.0",
   "scripts": {
+    "prepare": "npm run build",
     "build": "tsc",
     "test": "tsc -p ./tsconfig.test.json"
   },

@@ -1,4 +1,4 @@
-# Well Rested
+# 🛏️ Well Rested 🛏️
 
 Rest well knowing your REST API is correctly typed!
 
@@ -22,6 +22,8 @@ npm i well-rested
 ```
 
 ### Usage
+
+* Ensure to use either the `bundler` or `nodeNext` options for `moduleResolution` in your `tsconfig.json` in order to follow the following example.
 
 In order to define an API you simply define a type which extends the `APIDef` interface, and create an instance of the `API` class using it as a generic argument.
 
