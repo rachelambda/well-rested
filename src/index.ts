@@ -15,8 +15,8 @@ export interface APIDef {
   })
 }
 
-export type ValidEndPointFor<M extends "GET" | "POST", T, U extends keyof T> 
-  = T[U] extends { kind: M } ? null : never
+export type ValidEndPointFor<M extends "GET" | "POST", T, U extends keyof T, V> 
+  = T[U] extends { kind: M } ? V : never
 
 export class API<T extends APIDef> {
 
@@ -38,7 +38,7 @@ export class API<T extends APIDef> {
       for (const [key, value] of Object.entries(req.query)) {
         params.set(key, typeof(value) == "string" ? value : value.toString())
       }
-      url = new URL(params.toString(), url)
+      url = new URL("?" + params.toString(), url)
     }
 
     if (method == "POST" && req.request != null) {
@@ -56,16 +56,15 @@ export class API<T extends APIDef> {
   }
 
   async get<endpoint extends string, 
-            _ extends ValidEndPointFor<"GET", T, endpoint>,
-            reqtype extends ("query" extends keyof T[endpoint] ? { query: T[endpoint]["query"] } : {})>
+            reqtype extends ValidEndPointFor<"GET", T, endpoint, ("query" extends keyof T[endpoint] ? { query: T[endpoint]["query"] } : {})>>
               (ep : endpoint, req: reqtype): Promise<T[endpoint]["response"] | Response> {
     return this.dispatch("GET", ep, req as { query?: QueryParams })
   }
 
   async post<endpoint extends (string & keyof T), 
-             _ extends ValidEndPointFor<"POST", T, endpoint>,
-            reqtype extends ("query" extends T[endpoint] ? { query: T[endpoint]["query"] } : {})
-                          & (T[endpoint] extends { request?: Object } ? ("request" extends keyof T[endpoint] ? { request: T[endpoint]["request"] } : {}) : never)>
+            
+            reqtype extends ValidEndPointFor<"POST", T, endpoint, ("query" extends T[endpoint] ? { query: T[endpoint]["query"] } : {})
+                          & (T[endpoint] extends { request?: Object } ? ("request" extends keyof T[endpoint] ? { request: T[endpoint]["request"] } : {}) : never)>>
                 (ep : endpoint, req: reqtype): Promise<T[endpoint]["response"] | Response> {
     return this.dispatch("POST", ep, req as { query?: QueryParams, request?: Object })
   }
