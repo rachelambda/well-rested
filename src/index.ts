@@ -22,7 +22,7 @@ export class API<T extends APIDef> {
 
   private readonly base: string;
 
-  constructor(base: string) {
+  constructor(base: (`http://${string}`) | (`https://${string}`)) {
     this.base = base;
   }
 
