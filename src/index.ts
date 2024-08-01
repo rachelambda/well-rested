@@ -63,8 +63,9 @@ export class API<T extends APIDef> {
 
   async post<endpoint extends (string & keyof T), 
             
-            reqtype extends ValidEndPointFor<"POST", T, endpoint, ("query" extends T[endpoint] ? { query: T[endpoint]["query"] } : {})
-                          & (T[endpoint] extends { request?: Object } ? ("request" extends keyof T[endpoint] ? { request: T[endpoint]["request"] } : {}) : never)>>
+            reqtype extends ValidEndPointFor<"POST", T, endpoint, 
+              ("query" extends T[endpoint] ? { query: T[endpoint]["query"] } : {})
+            & (T[endpoint] extends { request?: Object } ? ("request" extends keyof T[endpoint] ? { request: T[endpoint]["request"] } : {}) : {})>>
                 (ep : endpoint, req: reqtype): Promise<T[endpoint]["response"] | Response> {
     return this.dispatch("POST", ep, req as { query?: QueryParams, request?: Object })
   }

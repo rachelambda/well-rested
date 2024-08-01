@@ -11,6 +11,10 @@ type MyAPI = {
     kind: "GET",
     response: { date: string },
   },
+  "/foo/timepost": {
+    kind: "POST",
+    response: { date: string },
+  },
   "/foo/login": {
     kind: "POST",
     request:  { user: { name: string, password: string } },
@@ -36,6 +40,10 @@ console.log(barResponse)
 const dateResponse : { date: string } | Response = await myApi.get("/foo/time", {})
 
 console.log(dateResponse)
+
+const datePostResponse : { date: string } | Response = await myApi.post("/foo/timepost", {})
+
+console.log(datePostResponse)
 
 const loginResponse : { accessToken: string } | { error: string } | Response = await myApi.post("/foo/login", {
   request: { user: { name: "bunger", password: "cat" } } 

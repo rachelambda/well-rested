@@ -1,6 +1,6 @@
 {
   "name": "@rachelambda/well-rested",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A typescript package for defining well-typed restful APIs",
   "type": "module",
   "exports": "./dist/index.js",
@@ -20,6 +20,7 @@
     "REST",
     "api",
     "typing",
+    "backend",
     "types"
   ],
   "author": "Rachel Lambda Samuelsson",
